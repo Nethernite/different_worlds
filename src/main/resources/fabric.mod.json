@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "differentworlds",
+	"version": "${version}",
+	"name": "Different Worlds",
+	"description": "Remember to change this",
+	"authors": [
+		"LittleAura"
+	],
+	"contact": {
+		"homepage": "https://littleaura.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/differentworlds/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.littleaura.differentworlds.DifferentWorlds"
+		],
+		"fabric-datagen": [
+			"net.littleaura.differentworlds.DifferentWorldsDataGenerator"
+		],
+      "client": [
+        "net.littleaura.differentworlds.DifferentWorldsClient"
+      ]
+	},
+	"mixins": [
+		"differentworlds.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.1",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
