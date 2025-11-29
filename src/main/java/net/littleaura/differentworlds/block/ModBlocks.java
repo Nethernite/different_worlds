@@ -2,6 +2,7 @@ package net.littleaura.differentworlds.block;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.littleaura.differentworlds.DifferentWorlds;
+import net.littleaura.differentworlds.block.custom.EnergyVesselBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.HeavyCoreBlock;
@@ -10,14 +11,22 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 
 public class ModBlocks {
 
     public static final Block ENERGY_VESSEL = registerBlock("energy_vessel",
-            new HeavyCoreBlock(AbstractBlock.Settings.create()
+            new EnergyVesselBlock(AbstractBlock.Settings.create()
                     .strength(5f)
-                    .requiresTool()));
+                    .requiresTool()
+                    .sounds(BlockSoundGroup.GLASS)));
+
+    public static final Block FRACTURED_ENERGY_VESSEL = registerBlock("fractured_energy_vessel",
+            new EnergyVesselBlock(AbstractBlock.Settings.create()
+                    .strength(5f)
+                    .requiresTool()
+                    .sounds(BlockSoundGroup.GLASS)));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
