@@ -3,6 +3,7 @@ package net.littleaura.differentworlds;
 import net.fabricmc.api.ModInitializer;
 
 import net.littleaura.differentworlds.block.ModBlocks;
+import net.littleaura.differentworlds.block.entity.ModBlockEntities;
 import net.littleaura.differentworlds.item.ModItemGroups;
 import net.littleaura.differentworlds.item.ModItems;
 import org.slf4j.Logger;
@@ -26,5 +27,7 @@ public class DifferentWorlds implements ModInitializer {
 
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
+
+        ModBlockEntities.registerBlockEntites();
 	}
 }

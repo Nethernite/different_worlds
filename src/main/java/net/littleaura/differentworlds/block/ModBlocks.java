@@ -5,7 +5,6 @@ import net.littleaura.differentworlds.DifferentWorlds;
 import net.littleaura.differentworlds.block.custom.EnergyVesselBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.block.HeavyCoreBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
