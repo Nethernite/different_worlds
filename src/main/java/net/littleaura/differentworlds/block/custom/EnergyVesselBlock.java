@@ -45,9 +45,9 @@ public class EnergyVesselBlock extends BlockWithEntity implements BlockEntityPro
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
         tooltip.add(Text.translatable("tooltip.differentworlds.energy_vessel.tooltip")
                 .append(Text.literal(": "
-                        + String.valueOf(EnergyVesselBlockEntity.currentEnergy)
+                        /*+ String.valueOf(EnergyVesselBlockEntity.currentEnergy)
                         + "/"
-                        + String.valueOf(EnergyVesselBlockEntity.MAX_ENERGY))));
+                        + String.valueOf(EnergyVesselBlockEntity.MAX_ENERGY)*/)));
         super.appendTooltip(stack, context, tooltip, options);
     }
 
