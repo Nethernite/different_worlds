@@ -16,12 +16,12 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
     @Override
     protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
         getOrCreateTagBuilder(BlockTags.PICKAXE_MINEABLE)
-                .add(ModBlocks.ENERGY_VESSEL)
-                .add(ModBlocks.FRACTURED_ENERGY_VESSEL)
+                .add(ModBlocks.ENERGY_VESSEL_BLOCK)
+                .add(ModBlocks.FRACTURED_ENERGY_VESSEL_BLOCK)
                 ;
         getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
-                .add(ModBlocks.ENERGY_VESSEL)
-                .add(ModBlocks.FRACTURED_ENERGY_VESSEL)
+                .add(ModBlocks.ENERGY_VESSEL_BLOCK)
+                .add(ModBlocks.FRACTURED_ENERGY_VESSEL_BLOCK)
                 ;
     }
 }

@@ -2,6 +2,7 @@ package net.littleaura.differentworlds.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import net.littleaura.differentworlds.block.entity.custom.EnergyVesselBlockEntity;
+import net.littleaura.differentworlds.component.ModDataComponentTypes;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,6 +20,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Objects;
 
 public class EnergyVesselBlock extends BlockWithEntity implements BlockEntityProvider {
 
@@ -29,12 +31,13 @@ public class EnergyVesselBlock extends BlockWithEntity implements BlockEntityPro
         super(settings);
     }
 
-    //Remember to change this as it will not work once blockentity is added
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (player.getInventory().getMainHandStack().isEmpty()) {
             if (!world.isClient) {
-                player.getInventory().setStack(player.getInventory().selectedSlot, new ItemStack(RegistryEntry.of(state.getBlock().asItem())));
+                //look into again
+                player.getInventory().setStack(player.getInventory().selectedSlot, new ItemStack(state.getBlock().asItem()));
+                player.getInventory().getMainHandStack().set(ModDataComponentTypes.ENERGY_STORAGE, Objects.requireNonNull(world.getBlockEntity(pos)).getComponents().get(ModDataComponentTypes.ENERGY_STORAGE));
                 world.removeBlock(pos, false);
             }
         }
@@ -43,11 +46,15 @@ public class EnergyVesselBlock extends BlockWithEntity implements BlockEntityPro
 
     @Override
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
-        tooltip.add(Text.translatable("tooltip.differentworlds.energy_vessel.tooltip")
-                .append(Text.literal(": "
-                        /*+ String.valueOf(EnergyVesselBlockEntity.currentEnergy)
-                        + "/"
-                        + String.valueOf(EnergyVesselBlockEntity.MAX_ENERGY)*/)));
+        try {
+            tooltip.add(Text.translatable("tooltip.differentworlds.energy_vessel.tooltip")
+                    .append(Text.literal(": "
+                            + Objects.requireNonNull(stack.getComponents().get(ModDataComponentTypes.ENERGY_STORAGE)).stored_energy()
+                            + "/"
+                            + Objects.requireNonNull(stack.getComponents().get(ModDataComponentTypes.ENERGY_STORAGE)).max_energy())));
+        } catch (NullPointerException e) {
+            tooltip.add(Text.literal("§4Missing Component"));
+        }
         super.appendTooltip(stack, context, tooltip, options);
     }
 

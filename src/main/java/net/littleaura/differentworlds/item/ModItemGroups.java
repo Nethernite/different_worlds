@@ -15,12 +15,12 @@ public class ModItemGroups {
     public static final ItemGroup ENERGY_ITEM_GROUP = Registry.register(Registries.ITEM_GROUP,
             Identifier.of(DifferentWorlds.MOD_ID, "energy_items"),
             FabricItemGroup.builder()
-                    .icon(() -> new ItemStack(ModBlocks.ENERGY_VESSEL))
+                    .icon(() -> new ItemStack(ModBlocks.ENERGY_VESSEL_BLOCK))
                     .displayName(Text.translatable("itemgroup.differentworlds.energy_items"))
                     .entries((displayContext, entries) -> {
 
-                        entries.add(ModBlocks.ENERGY_VESSEL);
-                        entries.add(ModBlocks.FRACTURED_ENERGY_VESSEL);
+                        entries.add(ModBlocks.ENERGY_VESSEL_BLOCK);
+                        entries.add(ModBlocks.FRACTURED_ENERGY_VESSEL_BLOCK);
 
                     }).build());
 
