@@ -20,7 +20,7 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {
 
                         entries.add(ModBlocks.ENERGY_VESSEL_BLOCK);
-                        entries.add(ModBlocks.FRACTURED_ENERGY_VESSEL_BLOCK);
+                        //entries.add(ModBlocks.FRACTURED_ENERGY_VESSEL_BLOCK);
 
                     }).build());
 

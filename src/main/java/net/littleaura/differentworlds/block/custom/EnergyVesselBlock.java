@@ -30,8 +30,6 @@ public class EnergyVesselBlock extends BlockWithEntity implements BlockEntityPro
         super(settings);
     }
 
-
-
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (player.getInventory().getMainHandStack().isEmpty()) {
