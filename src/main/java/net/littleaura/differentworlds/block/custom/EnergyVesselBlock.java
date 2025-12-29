@@ -9,7 +9,6 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -31,13 +30,18 @@ public class EnergyVesselBlock extends BlockWithEntity implements BlockEntityPro
         super(settings);
     }
 
+
+
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if (player.getInventory().getMainHandStack().isEmpty()) {
             if (!world.isClient) {
-                //look into again
-                player.getInventory().setStack(player.getInventory().selectedSlot, new ItemStack(state.getBlock().asItem()));
-                player.getInventory().getMainHandStack().set(ModDataComponentTypes.ENERGY_STORAGE, Objects.requireNonNull(world.getBlockEntity(pos)).getComponents().get(ModDataComponentTypes.ENERGY_STORAGE));
+                final ItemStack pickStack = getPickStack(world, pos, state);
+                final BlockEntity blockEntity = world.getBlockEntity(pos);
+                if (blockEntity instanceof EnergyVesselBlockEntity energyVesselBlockEntity) {
+                    pickStack.applyComponentsFrom(energyVesselBlockEntity.createComponentMap());
+                }
+                player.getInventory().setStack(player.getInventory().selectedSlot, pickStack);
                 world.removeBlock(pos, false);
             }
         }
@@ -46,13 +50,13 @@ public class EnergyVesselBlock extends BlockWithEntity implements BlockEntityPro
 
     @Override
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
-        try {
+        if (stack.getComponents().contains(ModDataComponentTypes.ENERGY_STORAGE)) {
             tooltip.add(Text.translatable("tooltip.differentworlds.energy_vessel.tooltip")
                     .append(Text.literal(": "
                             + Objects.requireNonNull(stack.getComponents().get(ModDataComponentTypes.ENERGY_STORAGE)).stored_energy()
                             + "/"
                             + Objects.requireNonNull(stack.getComponents().get(ModDataComponentTypes.ENERGY_STORAGE)).max_energy())));
-        } catch (NullPointerException e) {
+        } else {
             tooltip.add(Text.literal("§4Missing Component"));
         }
         super.appendTooltip(stack, context, tooltip, options);
