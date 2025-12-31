@@ -6,7 +6,6 @@ import net.littleaura.differentworlds.component.EnergyStorage;
 import net.littleaura.differentworlds.component.ModDataComponentTypes;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
-import net.minecraft.component.ComponentType;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -17,11 +16,12 @@ import net.minecraft.util.Identifier;
 
 public class ModBlocks {
 
-    public static final Block ENERGY_VESSEL_BLOCK = registerEnergyVesselBlock("energy_vessel",
+    //how do i add default components?
+    public static final Block ENERGY_VESSEL_BLOCK = registerBlock("energy_vessel",
             new EnergyVesselBlock(AbstractBlock.Settings.create()
                     .strength(5f)
                     .requiresTool()
-                    .sounds(BlockSoundGroup.GLASS)), 1000);
+                    .sounds(BlockSoundGroup.GLASS)));
 
     /*public static final Block FRACTURED_ENERGY_VESSEL_BLOCK = registerEnergyVesselBlock("fractured_energy_vessel",
             new EnergyVesselBlock(AbstractBlock.Settings.create()
@@ -48,6 +48,7 @@ public class ModBlocks {
     private static void registerEnergyVesselBlockItem(String name, Block block, int defaultMaxEnergy) {
         Registry.register(Registries.ITEM, Identifier.of(DifferentWorlds.MOD_ID, name),
                 new BlockItem(block, new Item.Settings()
+                        //if i try to add these default components, they don't work anymore for some reason
                         .component(ModDataComponentTypes.ENERGY_STORAGE, new EnergyStorage(0, defaultMaxEnergy, ""))
                         .component(DataComponentTypes.MAX_STACK_SIZE, 1)));
     }
